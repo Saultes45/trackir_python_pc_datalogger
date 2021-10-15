@@ -155,7 +155,7 @@ def main():
 
     # show the order of the data columns
     log.info(
-        " Timestamp[ms], Frame Number, Roll[deg], Pitch[deg], Yaw[deg], X[m], Y[m], Z[m]")
+        " Timestamp[ms], Frame Number[N/A], Roll[deg], Pitch[deg], Yaw[deg], X[mm], Y[mm], Z[mm]")  # Notice the space at the start
 
     # Acquisition loop
     while True:
@@ -175,7 +175,7 @@ def main():
             try:
                 # Source: "Method: Nested Replacement Fields"   https://realpython.com/python-formatted-output/
                 # "The string modulo operator only allows <width> and <prec>"
-                log.info(",{:07d},{:011d},{:{}},{:+.5f},{:+.5f},{:+.5f},{:+.5f},{:+.5f}".format(
+                log.info(",{:07d},{:011d},{:+.5f},{:+.5f},{:+.5f},{:+.5f},{:+.5f},{:+.5f}".format(
                     time_ms,
                     trackIRData.frame,
                     trackIRData.roll,
