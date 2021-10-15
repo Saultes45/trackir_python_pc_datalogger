@@ -19,7 +19,8 @@
 
 # TODO list:
 # compare xlsxwriter speed vs logging
-#
+# import parameters from INI file
+# Compile to .exe
 
 # ---------------------- imports -----------------------------------------
 
@@ -72,10 +73,9 @@ lineLogFormat   = '%(asctime)s.%(msecs)03d%(message)s'  # comma without space is
 
 ##------------------ Main ------------------------
 def main():
-    # Logging
 
-    # create a reference number which is shared for all the data generated for this particular execution
-    # this reference is just the date time
+    # Create a reference number which is shared for all the data generated for this particular execution
+    # This reference is just the date time
     testRef = time.strftime(logFileNameDateFormat)
 
     # Create a data folder in root/CWD
@@ -86,10 +86,13 @@ def main():
     if not (os.path.isdir(os.getcwd() + '/' + dataFolderName + '/' + testRef)):
         os.mkdir(os.getcwd() + '/' + dataFolderName + '/' + testRef)
 
+    # Generate a log file name
     LOG_FILENAME = os.getcwd() + '/' + dataFolderName + '/' + testRef + '/' + testRef + '-Data.log'
+
+    # Prepare the logger
     log = logging.getLogger()
     log.setLevel(logging.DEBUG)
-    # logFileHandler = logging.FileHandler(filename=LOG_FILENAME)
+    # noinspection PyTypeChecker
     logFileHandler = RotatingFileHandler(filename=LOG_FILENAME,
                                          mode='a',
                                          backupCount=nbrLogFiles - 1,
@@ -123,17 +126,16 @@ def main():
     try:
         trackrIr = TrackIRDLL(app.wm_frame())
     except Exception as e:
-        # logprint("Crash!\n  (This usually means you need to restart the TrackIR GUI)\n")
         print("Crash!\n  (This usually means you need to restart the TrackIR GUI)\n")
         raise e
 
-    # statistics variables initialisation
+    # Statistics variables initialisation (to display in the console when user close the GUI)
     previous_frame = -1
     num_logged_frames = 0
     num_missed_frames = 0
     start_time = time.time()
 
-    ## Tells what happens when the stop button of the tkinter GUI is pressed
+    # Tell what happens when the stop button of the tkinter GUI is pressed
     def signal_handler(sig, frame):
         trackrIr.stop()
         print("Number of frames logged (num_logged_frames): {}".format(num_logged_frames))
@@ -146,14 +148,16 @@ def main():
 
     signal.signal(signal.SIGINT, signal_handler)
 
+    # show the order of the data columns
     log.info(
-        " Timestamp[ms], Frame Number, Roll[deg], Pitch[deg], Yaw[deg], X[m], Y[m], Z[m]")  # show the order of the data columns
+        " Timestamp[ms], Frame Number, Roll[deg], Pitch[deg], Yaw[deg], X[m], Y[m], Z[m]")
 
-    ## Aquisition loop
-    while (True):
+    # Acquisition loop
+    while True:
 
         trackIRData = trackrIr.NP_GetData()  # get the data from TrackIR
-        if trackIRData.frame != previous_frame:  # check the data are fresh using the frame number variable, reported by TrackIR
+        if trackIRData.frame != previous_frame:  # check the data are fresh using the frame number variable, reported
+            # by TrackIR
 
             num_logged_frames += 1  # increment our own variable
             if previous_frame != -1:
@@ -188,5 +192,6 @@ def main():
         time.sleep(1 / aquisitionLoopTargetFrequency)  # wait time before cheching new data available
 
 
+# This is where we execute the main
 if __name__ == "__main__":
     main()
