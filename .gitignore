@@ -1,3 +1,10 @@
 /01_DataAquisition_Python/venv/
 01_DataAquisition_Python/__pycache__/TrackIR_to_log_file.cpython-37.pyc
+/01_DataAquisition_Python/Data/
+/01_DataAquisition_Python/TrackIR_to_log_file.spec
+/01_DataAquisition_Python/build/
+/01_DataAquisition_Python/__pycache__
+/01_DataAquisition_Python/.idea
+/01_DataAquisition_Python/dist/Data/
+/01_DataAquisition_Python/.idea/
 *.log
