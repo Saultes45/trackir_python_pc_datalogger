@@ -87,13 +87,13 @@ def main():
         os.mkdir(os.getcwd() + '/' + dataFolderName + '/' + testRef)
 
     # Generate a log file name
-    LOG_FILENAME = os.getcwd() + '/' + dataFolderName + '/' + testRef + '/' + testRef + '-Data.log'
+    logFileName = os.getcwd() + '/' + dataFolderName + '/' + testRef + '/' + testRef + '-Data.log'
 
     # Prepare the logger
     log = logging.getLogger()
     log.setLevel(logging.DEBUG)
     # noinspection PyTypeChecker
-    logFileHandler = RotatingFileHandler(filename=LOG_FILENAME,
+    logFileHandler = RotatingFileHandler(filename=logFileName,
                                          mode='a',
                                          backupCount=nbrLogFiles - 1,
                                          maxBytes=maxLogFileMegaBytesSize * 1024 * 1024,
