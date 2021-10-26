@@ -196,7 +196,7 @@ def main():
         except Exception:
             signal_handler(0, 0)
 
-        time.sleep(1 / aquisitionLoopTargetFrequency)  # wait time before cheching new data available
+        time.sleep(1 / aquisitionLoopTargetFrequency)  # wait time before checking new data available
 
 
 # This is where we execute the main
