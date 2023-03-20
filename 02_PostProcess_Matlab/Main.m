@@ -59,13 +59,16 @@ occured_error = 0; % not used yet
 
 %% Parameters
 
-inputFile = "E:\Documents\08_Github Local Repo\python_trackir\Data\2021-10-10--15-16-56\2021-10-10--15-16-56-Data.log"; % TODO, have apop up selection
+% inputFile = "E:\Documents\08_Github Local Repo\python_trackir\Data\2021-10-10--15-16-56\2021-10-10--15-16-56-Data.log"; % TODO, have apop up selection
+
+% inputFile = "F:\Dropbox\51_MIMU Inertial Elements\03_Code from Inertial Elements\MIMU48XC\MIMU48XC-4844-Raw\2022-08-10--11-39-00-Data.log";
+inputFile = "F:\Dropbox\51_MIMU Inertial Elements\03_Code from Inertial Elements\MIMU48XC\MIMU48XC-4844-Raw\2022-08-10--11-32-47-Data.log";
 
 Do.ZeroAtStart          = 1; % not yet implemented
 Do.SLERPsmoothing       = 0; % not yet implemented
 Do.plotData             = 1;
 Do.saveFigures          = 0;
-Do.saveData             = 1;
+Do.saveData             = 0;
 
 SaveFiguresPath = 'fig';
 saveFigureDPI = 1200;
